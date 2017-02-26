@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>三连棋游戏</title>
-        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+        <script src="//cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
     </head>
     <body>
         <h2>三连棋游戏</h2>

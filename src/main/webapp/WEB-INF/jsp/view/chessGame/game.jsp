@@ -6,9 +6,10 @@
 <html>
 <head>
     <title>三连棋游戏</title>
-    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<c:url value="/resource/stylesheet/chessGame.css"/>">
-    <script src="//cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/2.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <h2>三连棋游戏</h2>
@@ -74,7 +75,7 @@
 
         $('.game-cell').addClass("span1");
 
-        if(!("WebSocket") in window) {
+        if(!("WebSocket" in window)) {
             modalErrorBody.text("当前浏览器不支持WebSocket，请使用IE10或者最新版本的火狐或者谷歌浏览器")
             modalError.modal("show");
             return;
@@ -162,7 +163,6 @@
             }
             if(server != null) {
                 server.send(JSON.stringify({row: row, column: column}));
-                $('#r' + row + 'c' + column).unbind('click').removeClass('game-cell-selectable');
                 $('#r' + row + 'c' + column).unbind('click').removeClass('game-cell-selectable').addClass('game-cell-player game-cell-taken');
                 toggleTurn(false);
             } else {
