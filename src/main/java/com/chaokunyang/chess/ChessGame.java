@@ -60,14 +60,14 @@ public class ChessGame {
     }
 
     public synchronized void move(Player player, int row, int column) {
-        if (player == this.nextMove)
+        if (player != this.nextMove)
             throw new IllegalStateException("It is not your turn!");
         if(row > 2 || column > 2)
             throw new IllegalStateException("Row and column must be 0-3.");
         if(this.grid[row][column] != null)
             throw new IllegalStateException("Mover already made at " + row + "," + column);
         this.grid[row][column] = player;
-        this.nextMove = this.nextMove== Player.PLAYER1 ? Player.PLAYER2 : Player.PLAYER1;
+        this.nextMove = this.nextMove == Player.PLAYER1 ? Player.PLAYER2 : Player.PLAYER1;
         this.winner = this.calculateWinner();
         if(this.getWinner() != null || this.isDraw())
             this.over = true;
@@ -88,7 +88,7 @@ public class ChessGame {
             if(this.grid[i][0] == null || this.grid[i][1] == null || this.grid[i][2] == null)
                 draw = false;
             if(this.grid[i][0] != null && this.grid[i][0] == this.grid[i][1] &&
-                    this.grid[i][2] == null)
+                    this.grid[i][0] == this.grid[i][2])
                 return this.grid[i][0];
         }
         // 竖着赢

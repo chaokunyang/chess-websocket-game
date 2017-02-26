@@ -25,22 +25,22 @@ public class ChessServer {
             ChessGame chessGame = ChessGame.getActiveGame(gameId);
             if (chessGame != null) {
                 session.close(new CloseReason(CloseReason.CloseCodes.UNEXPECTED_CONDITION, "当前游戏已经开始了"));
+            }
 
-                List<String> actions = session.getRequestParameterMap().get("action");
-                if (actions != null && actions.size() == 1) {
-                    String action = actions.get(0);
-                    if ("start".equalsIgnoreCase(action)) {
-                        Game game = new Game();
-                        game.gameId = gameId;
-                        game.player1 = session;
-                        games.put(gameId, game);
-                    } else if ("join".equalsIgnoreCase(action)) {
-                        Game game = games.get(gameId);
-                        game.player2 = session;
-                        game.chessGame = ChessGame.startGame(gameId, username);
-                        this.sendJsonMessage(game.player1, game, new GameStartedMessage(game.chessGame));
-                        this.sendJsonMessage(game.player2, game, new GameStartedMessage(game.chessGame));
-                    }
+            List<String> actions = session.getRequestParameterMap().get("action");
+            if (actions != null && actions.size() == 1) {
+                String action = actions.get(0);
+                if ("start".equalsIgnoreCase(action)) {
+                    Game game = new Game();
+                    game.gameId = gameId;
+                    game.player1 = session;
+                    games.put(gameId, game);
+                } else if ("join".equalsIgnoreCase(action)) {
+                    Game game = games.get(gameId);
+                    game.player2 = session;
+                    game.chessGame = ChessGame.startGame(gameId, username);
+                    this.sendJsonMessage(game.player1, game, new GameStartedMessage(game.chessGame));
+                    this.sendJsonMessage(game.player2, game, new GameStartedMessage(game.chessGame));
                 }
             }
         } catch (IOException e) {

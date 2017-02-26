@@ -96,7 +96,7 @@
 
         server.onopen = function (event) {
             modalWaitingBody.text('等待你的对手加入游戏.')
-            modalWaiting.modal({kyeboard: false, show: true});
+            modalWaiting.modal({keyboard: false, show: true});
         }
 
         window.onbeforeunload = function () {
@@ -110,7 +110,13 @@
                 modalErrorBody.text('Code' + event.code + ": " + event.reason);
                 modalError.modal('show');
             }
-        }
+        };
+
+        server.onerror = function(event) {
+            modalWaiting.modal('hide');
+            modalErrorBody.text(event.data);
+            modalError.modal('show');
+        };
 
         server.onmessage = function (event) {
             var message = JSON.parse(event.data);
@@ -131,8 +137,8 @@
                     modalGameOverBody.text("恭喜您赢了!");
                 }else {
                     modalGameOverBody.text('用户 "' + opponentUsername + '" 赢了.');
-                    modalGameOver.modal('show');
                 }
+                modalGameOver.modal('show');
             }else if(message.action == 'gameIsDraw') {
                 toggleTurn(false, '平局，没有赢家.');
                 modalGameOverBody.text('游戏平局，没有人胜利.');
@@ -155,7 +161,7 @@
             }
         };
 
-        var move = function (row, column) {
+        move = function (row, column) {
             if(!myTurn) {
                 modalErrorBody.text('还不是你的回合哦!');
                 modalError.modal('show');
