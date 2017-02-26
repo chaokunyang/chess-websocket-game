@@ -1,0 +1,34 @@
+#gameContainer .row {
+    margin: 4px 0 4px 0;
+}
+.game-cell {
+    width: 100px;
+    height: 100px;
+    background-color: #EEEEEE;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+.game-cell-selectable {
+    cursor: pointer;
+}
+.game-cell-selectable:hover {
+    background-image: url('../image/chess-hover.png');
+}
+.game-cell-taken {
+
+}
+.game-cell-player {
+    background-image: url('../image/chess-player.png');
+}
+.game-cell-opponent {
+    background-image: url('../image/chess-opponent.png');
+}
+.player-label {
+    font-weight: bold;
+}
+#status {
+    font-weight: bold;
+    font-style: italic;
+}

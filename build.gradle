@@ -1,0 +1,30 @@
+group 'com.chaokunyang'
+version '1.0.0'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    providedCompile "javax.servlet:javax.servlet-api:3.1.0"
+    providedCompile "javax.servlet.jsp:javax.servlet.jsp-api:2.3.1"
+    providedCompile "javax.el:javax.el-api:3.0.0"
+    compile "javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1"
+    compile ("org.glassfish.web:javax.servlet.jsp.jstl:1.2.2") {
+        exclude group: 'javax.servlet:servlet-api'
+        exclude group: 'javax.servlet.jsp:jsp-api'
+        exclude group: 'javax.servlet.jsp.jstl:jstl-api'
+    }
+    providedCompile "javax.websocket:javax.websocket-api:1.0"
+    compile "org.apache.commons:commons-lang3:3.3.2"
+    compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
+}
